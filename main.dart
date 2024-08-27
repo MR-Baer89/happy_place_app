@@ -6,7 +6,7 @@ void main() {
   // Club Steckbrief
   print("Wilkommen bei HappyPlace");
   print(" MIt HappyPlace erleichterst du deine Freizeit Gestallung");
-  bool isProgramRunning = false;
+  bool isProgramRunning = true;
   while (isProgramRunning) {
     print("Was möchtest du tun? Programm (E)xit, (L)ogin, (C)lubsteckbrief.");
     // Eigabe des Users
@@ -22,6 +22,8 @@ void main() {
         stdout.write("Bitte Passwort eingeben");
         stdin.readLineSync();
       // Auswahl des Clubs
+      case "c" || "C":
+        stdout.write("Monkyclub, Hauptstraße 17, 56479 Rennerod");
     }
   }
 }
