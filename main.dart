@@ -1,5 +1,13 @@
 import "dart:io";
 
+List<String> clubs = [
+  "Monkyclub Rennerod",
+  "Titty Twister Hamburg",
+  "Funpark Limburg",
+  "Cube Hachenburg",
+  "B54 Rennerod",
+  "Magic Freilingen"
+];
 void main() {
   // Registrieren/Account anlegen
   // Login
@@ -23,7 +31,19 @@ void main() {
         stdin.readLineSync()!;
       // Auswahl des Clubs
       case "c" || "C":
-        stdout.write("Monkyclub, Hauptstraße 17, 56479 Rennerod");
+        print("Verfügbare Clubs:");
+        for (int i = 0; i < clubs.length; i++) {
+          print("${i + 1}. ${clubs[i]}");
+        }
+
+        stdout.write("Wähle eine Nummer, um den Club Steckbrief anzuzeigen: ");
+        int clubChoice = int.parse(stdin.readLineSync()!);
+
+        if (clubChoice > 0 && clubChoice <= clubs.length) {
+          print("Du hast gewählt: ${clubs[clubChoice - 1]}");
+        } else {
+          print("Ungültige Auswahl. Bitte versuche es erneut.");
+        }
     }
   }
 }
