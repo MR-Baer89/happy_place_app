@@ -8,7 +8,7 @@ void main() {
   print(" MIt HappyPlace erleichterst du deine Freizeit Gestallung");
   bool isProgramRunning = true;
   while (isProgramRunning) {
-    print("Was möchtest du tun? Programm (E)xit, (L)ogin, (C)lubsteckbrief.");
+    print("Was möchtest du tun? Programm: (E)xit,(L)ogin,(C)lubsteckbrief.");
     // Eigabe des Users
     String userChoiceInput = stdin.readLineSync()!;
 
@@ -20,7 +20,7 @@ void main() {
         stdout.write("Gib deinen Username ein:");
         stdin.readLineSync()!;
         stdout.write("Bitte Passwort eingeben");
-        stdin.readLineSync();
+        stdin.readLineSync()!;
       // Auswahl des Clubs
       case "c" || "C":
         stdout.write("Monkyclub, Hauptstraße 17, 56479 Rennerod");
