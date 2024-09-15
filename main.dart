@@ -1,57 +1,62 @@
-import "dart:io";
-import ".vscode/user_login.dart";
+import 'dart:io';
+import '.vscode/functions.dart';
 
-List<String> clubs = [
-  "Monkyclub Rennerod",
-  "Titty Twister Hamburg",
-  "Funpark Limburg",
-  "Cube Hachenburg",
-  "B54 Rennerod",
-  "Magic Freilingen"
-];
 void main() {
-  // Registrieren/Account anlegen
-  // Login
-  // Club Steckbrief
-  print("Wilkommen bei HappyPlace");
-  print(" MIt HappyPlace erleichterst du deine Freizeit Gestallung");
-
-  const String expectedUserName = "Mr. Bär";
-  const String expecedUserPassword = "baer1234";
+  print("Willkommen bei HappyPlace");
   bool isUserLoggedIn = false;
 
-  bool isProgramRunning = true;
-  while (isProgramRunning) {
-    if (isUserLoggedIn) {
-      print("Was möchtest du tun? Programm: (E)xit,(C)lubsteckbrief.");
+  // Hauptschleife für die Benutzerinteraktion
+  while (true) {
+    if (!isUserLoggedIn) {
+      print(
+          "\nBitte logge dich ein (oder gib 'exit' ein, um das Programm zu beenden).");
+
+      stdout.write("Benutzername: ");
+      String username = stdin.readLineSync()!;
+
+      if (username.toLowerCase() == "exit") {
+        break;
+      }
+
+      stdout.write("Passwort: ");
+      String password = stdin.readLineSync()!;
+
+      isUserLoggedIn = userLogin(users, username, password);
+
+      if (!isUserLoggedIn) {
+        print("Falscher Benutzername oder Passwort. Versuche es erneut.");
+      }
     } else {
-      print("Was möchtest du tun? Programm: (E)xit,(L)ogin,(C)lubsteckbrief.");
+      print("\nWas möchtest du tun?");
+      print("(1) Club Steckbrief anzeigen");
+      print("(2) Logout");
+      print("(3) Programm beenden");
 
-      // Eigabe des Users
-      String userChoiceInput = stdin.readLineSync()!;
+      stdout.write("Wähle eine Option: ");
+      String choice = stdin.readLineSync()!;
 
-      switch (userChoiceInput) {
-        case "e" || "E":
-          isProgramRunning = false;
-        // User soll sich mit Name und Passwort anmelden können.
-        case "l" || "L":
-          isUserLoggedIn = userLogin(expectedUserName, expecedUserPassword);
-        // Auswahl des Clubs
-        case "c" || "C":
-          print("Verfügbare Clubs:");
-          for (int i = 0; i < clubs.length; i++) {
-            print("${i + 1}. ${clubs[i]}");
-          }
+      if (choice == "1") {
+        print("\nVerfügbare Clubs:");
+        for (int i = 0; i < clubs.length; i++) {
+          print("${i + 1}. ${clubs[i]}");
+        }
 
-          stdout
-              .write("Wähle eine Nummer, um den Club Steckbrief anzuzeigen: ");
-          int clubChoice = int.parse(stdin.readLineSync()!);
+        stdout.write("Wähle eine Clubnummer, um den Steckbrief zu sehen: ");
+        int clubChoice = int.parse(stdin.readLineSync()!);
 
-          if (clubChoice > 0 && clubChoice <= clubs.length) {
-            print("Du hast gewählt: ${clubs[clubChoice - 1]}");
-          } else {
-            print("Ungültige Auswahl. Bitte versuche es erneut.");
-          }
+        if (clubChoice > 0 && clubChoice <= clubs.length) {
+          print("\nDu hast den Club gewählt: ${clubs[clubChoice - 1]}");
+        } else {
+          print("Ungültige Auswahl. Bitte versuche es erneut.");
+        }
+      } else if (choice == "2") {
+        isUserLoggedIn = false;
+        print("Du wurdest ausgeloggt.");
+      } else if (choice == "3") {
+        print("Programm wird beendet.");
+        break;
+      } else {
+        print("Ungültige Auswahl. Bitte versuche es erneut.");
       }
     }
   }
